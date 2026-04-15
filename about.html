@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About | Diksha Khamkar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #faf8f4; --white: #ffffff; --ink: #1a1a2e;
+      --accent: #4a6fa5; --accent-light: #e8f0fb;
+      --muted: #6b7280; --border: #e5e0d8; --gold: #c9a84c;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,248,244,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%; display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    .page-header {
+      padding: 120px 5% 5rem;
+      background: linear-gradient(135deg, var(--white) 0%, var(--accent-light) 100%);
+      border-bottom: 1px solid var(--border);
+      animation: fadeIn 0.7s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; letter-spacing: 0.05em; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,4rem); font-weight: 300; }
+    .page-header p { color: var(--muted); font-size: 1.05rem; margin-top: 0.75rem; max-width: 500px; }
+
+    .content { padding: 5rem 5%; max-width: 1100px; margin: 0 auto; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1.6fr; gap: 4rem; align-items: start; }
+
+    .profile-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      position: sticky; top: 90px;
+      animation: fadeIn 0.8s ease 0.2s both;
+    }
+    .avatar {
+      width: 100px; height: 100px; border-radius: 50%;
+      background: var(--accent); color: #fff;
+      font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 600;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem;
+      box-shadow: 0 6px 20px rgba(74,111,165,0.3);
+    }
+    .profile-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; margin-bottom: 0.25rem; }
+    .profile-card .role { color: var(--accent); font-size: 0.85rem; font-weight: 500; margin-bottom: 1.2rem; }
+    .profile-detail { text-align: left; border-top: 1px solid var(--border); padding-top: 1.2rem; }
+    .detail-row { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid #f0ece6; }
+    .detail-row:last-child { border-bottom: none; }
+    .detail-key { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+    .detail-val { font-size: 0.85rem; font-weight: 500; color: var(--ink); }
+
+    .info-section { animation: fadeIn 0.8s ease 0.4s both; }
+    .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 1.5rem; }
+    p.body-text { font-size: 0.97rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    p.body-text strong { color: var(--ink); }
+
+    .edu-timeline { margin-top: 3rem; }
+    .edu-item {
+      display: flex; gap: 1.5rem; padding: 1.5rem;
+      background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+      margin-bottom: 1rem; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .edu-item:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(74,111,165,0.1); }
+    .edu-icon {
+      width: 44px; height: 44px; min-width: 44px; border-radius: 8px;
+      background: var(--accent-light); display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .edu-info h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .edu-info .edu-sub { font-size: 0.85rem; color: var(--muted); }
+    .edu-info .edu-grade { font-size: 0.85rem; color: var(--accent); font-weight: 600; margin-top: 0.3rem; }
+
+    .skills-wrap { margin-top: 3rem; }
+    .skill-category { margin-bottom: 2rem; }
+    .skill-category h4 { font-size: 0.85rem; font-weight: 600; color: var(--ink); margin-bottom: 0.75rem; letter-spacing: 0.04em; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .pill {
+      background: var(--cream); border: 1px solid var(--border);
+      padding: 6px 14px; border-radius: 20px; font-size: 0.82rem; font-weight: 500; color: var(--ink);
+      transition: all 0.2s;
+    }
+    .pill:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    footer { background: var(--ink); color: rgba(255,255,255,0.6); text-align: center; padding: 2rem 5%; font-size: 0.85rem; margin-top: 5rem; }
+    footer a { color: var(--accent-light); text-decoration: none; }
+
+    @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } .profile-card { position: static; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">DK</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="achievements.html">Achievements</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="breadcrumb"><a href="index.html">Home</a> / About</p>
+  <h1>About Me</h1>
+  <p>A snapshot of my academic journey, background, and skills.</p>
+</div>
+
+<div class="content">
+  <div class="two-col">
+
+    <div class="profile-card">
+      <div class="avatar">DK</div>
+      <h3>Diksha Khamkar</h3>
+      <p class="role">B.E. Computer Engineering</p>
+      <div class="profile-detail">
+        <div class="detail-row"><span class="detail-key">College</span><span class="detail-val">Pillai College</span></div>
+        <div class="detail-row"><span class="detail-key">Year</span><span class="detail-val">2nd Year</span></div>
+        <div class="detail-row"><span class="detail-key">CGPA</span><span class="detail-val">8.04 / 10</span></div>
+        <div class="detail-row"><span class="detail-key">Location</span><span class="detail-val">New Panvel, MH</span></div>
+        <div class="detail-row"><span class="detail-key">Status</span><span class="detail-val">Open to Internships</span></div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <p class="section-label">Introduction</p>
+      <h2 class="section-title">Who I Am</h2>
+      <p class="body-text">
+        I am <strong>Diksha Khamkar</strong>, a passionate and dedicated second-year <strong>B.E. Computer Engineering</strong> student at <strong>Pillai College of Engineering, New Panvel</strong>. I have consistently maintained a strong academic performance with a <strong>CGPA of 8.04</strong> across four semesters.
+      </p>
+      <p class="body-text">
+        My academic journey began with strong school results — scoring <strong>80.60% in my SSC (10th)</strong> and <strong>74% in my HSC (12th)</strong>. These milestones fueled my drive to pursue engineering and explore the vast world of computing.
+      </p>
+      <p class="body-text">
+        I am deeply interested in web development, problem-solving, and software engineering. I enjoy learning new technologies and applying them to build solutions that make a difference. I'm actively looking for opportunities to grow through internships and collaborative projects.
+      </p>
+
+      <div class="edu-timeline">
+        <p class="section-label" style="margin-top:2.5rem">Education</p>
+        <h2 class="section-title">Academic Background</h2>
+
+        <div class="edu-item">
+          <div class="edu-icon">🎓</div>
+          <div class="edu-info">
+            <h4>B.E. Computer Engineering</h4>
+            <p class="edu-sub">Pillai College of Engineering, New Panvel · 2023 – Present</p>
+            <p class="edu-grade">CGPA: 8.04 (Sem 1–4)</p>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-icon">📘</div>
+          <div class="edu-info">
+            <h4>Higher Secondary Certificate (HSC) · 12th Grade</h4>
+            <p class="edu-sub">Maharashtra State Board · 2022–23</p>
+            <p class="edu-grade">74%</p>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-icon">📗</div>
+          <div class="edu-info">
+            <h4>Secondary School Certificate (SSC) · 10th Grade</h4>
+            <p class="edu-sub">Maharashtra State Board · 2020–21</p>
+            <p class="edu-grade">80.60%</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="skills-wrap">
+        <p class="section-label" style="margin-top:2.5rem">Skills</p>
+        <h2 class="section-title">Technical Expertise</h2>
+
+        <div class="skill-category">
+          <h4>Programming Languages</h4>
+          <div class="skill-pills">
+            <span class="pill">C</span><span class="pill">C++</span><span class="pill">Java</span><span class="pill">Python</span><span class="pill">JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Web Technologies</h4>
+          <div class="skill-pills">
+            <span class="pill">HTML5</span><span class="pill">CSS3</span><span class="pill">Bootstrap</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Tools & Platforms</h4>
+          <div class="skill-pills">
+            <span class="pill">Git</span><span class="pill">GitHub</span><span class="pill">VS Code</span><span class="pill">Linux</span><span class="pill">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <h4>Core Concepts</h4>
+          <div class="skill-pills">
+            <span class="pill">OOP</span><span class="pill">DSA</span><span class="pill">DBMS</span><span class="pill">OS Concepts</span><span class="pill">Computer Networks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Diksha Khamkar · <a href="contact.html">Contact Me</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Achievements | Diksha Khamkar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #faf8f4; --white: #ffffff; --ink: #1a1a2e;
+      --accent: #4a6fa5; --accent-light: #e8f0fb;
+      --muted: #6b7280; --border: #e5e0d8; --gold: #c9a84c;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,248,244,0.92); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%; display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+    .page-header {
+      padding: 120px 5% 5rem;
+      background: linear-gradient(135deg, var(--accent-light) 0%, var(--white) 100%);
+      border-bottom: 1px solid var(--border);
+      animation: fadeIn 0.7s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem,5vw,4rem); font-weight: 300; }
+    .page-header p { color: var(--muted); font-size: 1.05rem; margin-top: 0.75rem; }
+
+    .content { padding: 5rem 5%; max-width: 900px; margin: 0 auto; }
+    .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 2.5rem; }
+
+    /* HIGHLIGHT CARDS */
+    .highlight-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-bottom: 4rem; }
+    .highlight-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; text-align: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+      animation: fadeIn 0.8s ease both;
+    }
+    .highlight-card:nth-child(1) { animation-delay: 0.1s; }
+    .highlight-card:nth-child(2) { animation-delay: 0.2s; }
+    .highlight-card:nth-child(3) { animation-delay: 0.3s; }
+    .highlight-card:hover { transform: translateY(-6px); box-shadow: 0 12px 35px rgba(74,111,165,0.15); }
+    .h-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+    .h-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 600; color: var(--accent); line-height: 1; }
+    .h-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.4rem; }
+
+    /* ACHIEVEMENT CARDS */
+    .ach-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .ach-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem 2.5rem;
+      display: flex; gap: 2rem; align-items: flex-start;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: slideIn 0.6s ease both;
+    }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    .ach-card:nth-child(1) { animation-delay: 0.1s; }
+    .ach-card:nth-child(2) { animation-delay: 0.2s; }
+    .ach-card:nth-child(3) { animation-delay: 0.3s; }
+    .ach-card:nth-child(4) { animation-delay: 0.4s; }
+    .ach-card:nth-child(5) { animation-delay: 0.5s; }
+    .ach-card:hover { transform: translateX(6px); box-shadow: 0 6px 25px rgba(74,111,165,0.1); }
+    .ach-badge {
+      min-width: 54px; height: 54px;
+      background: var(--accent-light); border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .ach-body h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .ach-body p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+    .ach-tag {
+      display: inline-block; margin-top: 0.6rem;
+      background: var(--accent-light); color: var(--accent);
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.05em;
+      padding: 3px 10px; border-radius: 10px;
+    }
+
+    /* CGPA TABLE */
+    .cgpa-section { margin-top: 4rem; }
+    table { width: 100%; border-collapse: collapse; background: var(--white); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    thead { background: var(--accent); color: #fff; }
+    th { padding: 1rem 1.5rem; text-align: left; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em; }
+    td { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--ink); }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--accent-light); }
+    .grade-pill { background: var(--accent-light); color: var(--accent); padding: 3px 10px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; }
+
+    footer { background: var(--ink); color: rgba(255,255,255,0.6); text-align: center; padding: 2rem 5%; font-size: 0.85rem; margin-top: 5rem; }
+    footer a { color: var(--accent-light); text-decoration: none; }
+
+    @media (max-width: 768px) { .highlight-grid { grid-template-columns: 1fr; } .ach-card { flex-direction: column; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">DK</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="achievements.html" class="active">Achievements</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="breadcrumb"><a href="index.html">Home</a> / Achievements</p>
+  <h1>Achievements</h1>
+  <p>Academic milestones and accomplishments throughout my journey.</p>
+</div>
+
+<div class="content">
+
+  <div class="highlight-grid">
+    <div class="highlight-card">
+      <div class="h-icon">🏅</div>
+      <div class="h-num">8.04</div>
+      <div class="h-label">Overall CGPA<br>(Semesters 1–4)</div>
+    </div>
+    <div class="highlight-card">
+      <div class="h-icon">📘</div>
+      <div class="h-num">80.60%</div>
+      <div class="h-label">SSC Score<br>(10th Grade)</div>
+    </div>
+    <div class="highlight-card">
+      <div class="h-icon">📗</div>
+      <div class="h-num">74%</div>
+      <div class="h-label">HSC Score<br>(12th Grade)</div>
+    </div>
+  </div>
+
+  <p class="section-label">Academic Performance</p>
+  <h2 class="section-title">Semester-wise CGPA</h2>
+
+  <div class="cgpa-section">
+    <table>
+      <thead>
+        <tr>
+          <th>Semester</th>
+          <th>Academic Year</th>
+          <th>Grade / CGPA</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Semester 1</td>
+          <td>2023 – 2024</td>
+          <td><span class="grade-pill">≈ 7.9</span></td>
+          <td>Passed ✅</td>
+        </tr>
+        <tr>
+          <td>Semester 2</td>
+          <td>2023 – 2024</td>
+          <td><span class="grade-pill">≈ 8.0</span></td>
+          <td>Passed ✅</td>
+        </tr>
+        <tr>
+          <td>Semester 3</td>
+          <td>2024 – 2025</td>
+          <td><span class="grade-pill">≈ 8.1</span></td>
+          <td>Passed ✅</td>
+        </tr>
+        <tr>
+          <td>Semester 4</td>
+          <td>2024 – 2025</td>
+          <td><span class="grade-pill">≈ 8.1</span></td>
+          <td>Passed ✅</td>
+        </tr>
+        <tr style="background:#f5f8fd;">
+          <td><strong>Overall CGPA</strong></td>
+          <td>Sem 1–4 Average</td>
+          <td><span class="grade-pill" style="background:#4a6fa5;color:#fff;">8.04</span></td>
+          <td><strong>Consistent 🎯</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="section-label" style="margin-top:4rem">Milestones & Highlights</p>
+  <h2 class="section-title">Key Achievements</h2>
+
+  <div class="ach-list">
+    <div class="ach-card">
+      <div class="ach-badge">🎓</div>
+      <div class="ach-body">
+        <h3>Consistent Academic Excellence in Engineering</h3>
+        <p>Maintained a strong CGPA of 8.04 across all four semesters of B.E. Computer Engineering at Pillai College of Engineering, demonstrating consistent effort and dedication to studies.</p>
+        <span class="ach-tag">Engineering · 2023–2025</span>
+      </div>
+    </div>
+
+    <div class="ach-card">
+      <div class="ach-badge">📘</div>
+      <div class="ach-body">
+        <h3>Strong Performance in SSC (10th Grade)</h3>
+        <p>Scored 80.60% in the Maharashtra State Board Secondary School Certificate examination, building a strong academic foundation in core subjects.</p>
+        <span class="ach-tag">Maharashtra Board · SSC</span>
+      </div>
+    </div>
+
+    <div class="ach-card">
+      <div class="ach-badge">📗</div>
+      <div class="ach-body">
+        <h3>Completed HSC with 74%</h3>
+        <p>Successfully completed Higher Secondary Certificate from Maharashtra State Board with 74%, clearing the gateway to engineering with a focus on Science stream.</p>
+        <span class="ach-tag">Maharashtra Board · HSC</span>
+      </div>
+    </div>
+
+    <div class="ach-card">
+      <div class="ach-badge">💻</div>
+      <div class="ach-body">
+        <h3>Completed Web Technologies Practical (GitHub Pages)</h3>
+        <p>Successfully built and deployed a multi-page personal portfolio website using HTML, CSS, and GitHub Pages — demonstrating skills in web development and version control.</p>
+        <span class="ach-tag">Web Dev · GitHub Pages</span>
+      </div>
+    </div>
+
+    <div class="ach-card">
+      <div class="ach-badge">🌐</div>
+      <div class="ach-body">
+        <h3>Developed Full Portfolio Website</h3>
+        <p>Designed and developed a complete 4-page personal portfolio website with responsive design, animations, and live deployment on GitHub Pages as part of curriculum work.</p>
+        <span class="ach-tag">Project · Portfolio Site</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Diksha Khamkar · <a href="contact.html">Contact Me</a></p>
+</footer>
+
+</body>
+</html>
